@@ -1,0 +1,103 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="LMS.Master.cs" Inherits="My_WebForm1.LMS" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>LMS</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+            background-color:antiquewhite;
+        }
+        .auto-style2 {
+            width: 100%;
+            background-color:thistle;
+        }
+        /* Top-level menu container */
+        .navMenu ul {
+            display: flex;
+            gap: 10px; /* space between capsules */
+            padding: 10px;
+            margin: 0;
+            list-style: none;
+        }
+        
+        /* Top-level menu items */
+        .navMenu > ul > li > a {
+            border: 2px solid #1abc9c;
+            /*border-radius: 999px;*/   /* capsule shape */
+            padding: 10px 18px;
+            color: black !important;
+            background-color: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        /* Hover effect */
+        .navMenu > ul > li > a:hover {
+            background-color: #1abc9c;
+            color: #fff !important;
+        }
+        
+        /* Dropdown container */
+        .navMenu ul ul {
+            /*border-radius: 12px;*/
+            overflow: hidden;
+        }
+        
+        /* Dropdown items */
+        .navMenu ul ul a {
+            /*border-radius: 0;*/
+            border: none;
+            background-color: transparent;
+        }
+        
+        .navMenu ul ul a:hover {
+            background-color: #1abc9c;
+        }
+
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <h4 style="text-align: center" > Welcome to LMS</h4>
+        <table class="auto-style1">
+            <tr>
+                <td>
+                    <asp:Menu ID="Menu1" runat="server" orientation="Horizontal" CssClass="navMenu">
+                        <Items>
+                            <asp:MenuItem Text="The Home" Value="The Home"></asp:MenuItem>
+                            <asp:MenuItem Text="Student" Value="Student">
+                                <asp:MenuItem Text="Login" Value="Login" NavigateUrl="~/Student_/StudentLogin.aspx"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Student_/Register.aspx" Text="Register" Value="Register"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Faculty" Value="Faculty">
+                                <asp:MenuItem Text="Login" Value="Login" NavigateUrl="~/Faculty/FacultyLogin.aspx"></asp:MenuItem>
+                            </asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;</td>
+            </tr>
+            </table>
+
+        <%--adding a placeholder for adding content in my Defaultpage--%>
+
+            <table class="auto-style2">
+                <tr>
+                    <td>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+
+    </form>
+
+</body>
+</html>
