@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentHome.aspx.cs" Inherits="My_WebForm1.Student_.StudentHome" %>
+﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentHome.aspx.cs" Inherits="My_WebForm1.Student_.StudentHome" %>
 
 <!DOCTYPE html>
 
@@ -55,7 +55,7 @@
                     </td>
                     <%--<td>&nbsp;</td>--%>
                 </tr>
-                <tr>
+                <%--<tr>
                     <td  class="auto-style2">Your Course Material links:</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -89,4 +89,182 @@
         </div>
     </form>
 </body>
+</html>--%--%>
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentHome.aspx.cs" Inherits="My_WebForm1.Student_.StudentHome" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Student Dashboard</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .welcome {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: #2a5298;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        /* DataList styling */
+        .course-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* GridView styling */
+        .gridview {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .gridview th {
+            background-color: #2a5298;
+            color: white;
+            padding: 8px;
+        }
+
+        .gridview td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .gridview tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Dropdown */
+        select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Button */
+        .btn {
+            background-color: #2a5298;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #1e3c72;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <form id="form1" runat="server">
+
+        <div class="container">
+
+            <!-- Welcome -->
+            <div class="welcome">
+                <asp:Label ID="LblStudHome" runat="server"></asp:Label>
+            </div>
+
+            <!-- Course Details -->
+            <div class="card">
+                <h3>Your Course Details</h3>
+
+                <asp:DataList ID="DLCourseDetails" runat="server" DataKeyField="ID"
+                    DataSourceID="StudCourseDetailsSource">
+
+                    <ItemTemplate>
+                        <div class="course-item">
+                            <b>Course:</b> <%# Eval("CourseName") %> <br />
+                            <b>Description:</b> <%# Eval("Description") %> <br />
+                            <b>Modules:</b> <%# Eval("Modules") %> <br />
+                            <b>Duration:</b> <%# Eval("Duration") %>
+                        </div>
+                    </ItemTemplate>
+
+                </asp:DataList>
+
+                <asp:SqlDataSource ID="StudCourseDetailsSource" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LMSConnectionString %>"
+                    SelectCommand="SELECT * FROM [CourseMaster] WHERE ([ID] = @ID)">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="ID" SessionField="courseid" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+            </div>
+
+            <!-- Test Attempts -->
+            <div class="card">
+                <h3>Your Test Attempts</h3>
+
+                <asp:GridView ID="GridViewTWA" runat="server" CssClass="gridview"></asp:GridView>
+            </div>
+
+            <!-- Attempt Test -->
+            <div class="card">
+                <h3>Attempt a Test</h3>
+
+                <asp:DropDownList ID="DdlTestId" runat="server"
+                    DataSourceID="StudTestsSource"
+                    DataTextField="Name"
+                    DataValueField="Id">
+                </asp:DropDownList>
+
+                <br />
+
+                <asp:LinkButton ID="LBtnAttemptTest" runat="server"
+                    CssClass="btn"
+                    OnClick="LBtnAttemptTest_Click">
+                    Start Test
+                </asp:LinkButton>
+
+                <asp:SqlDataSource ID="StudTestsSource" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:LMSConnectionString %>"
+                    SelectCommand="SELECT * FROM [TestMaster] WHERE ([CourseId] = @CourseId)">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="CourseId" SessionField="courseid" Type="Int32" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
+
+            </div>
+
+        </div>
+
+    </form>
+</body>
 </html>
+
+
+

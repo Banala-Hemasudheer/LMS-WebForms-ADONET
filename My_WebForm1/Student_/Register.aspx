@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="My_WebForm1.Student_.Register" %>
+﻿<%--<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="My_WebForm1.Student_.Register" %>
 
 <!DOCTYPE html>
 
@@ -151,7 +151,7 @@
                     <asp:FileUpload ID="FileUploadSelection" runat="server" />
                     <%--<asp:Image ID="ImageUploaded" runat="server" Height="45px" Visible="False" Width="60px" />--%><%--Instead of image I'll show uploaded file name--%>
                 </td>
-            </tr>
+            <%--</tr>
             <tr>
                 <td class="auto-style11" style="text-align: right">&nbsp;</td>
                 <td>
@@ -179,6 +179,230 @@
                     </td>
             </tr>
         </table>
+    </form>
+</body>
+</html>--%>
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="My_WebForm1.Student_.Register" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Student Registration</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial;
+            background-color: #f4f6f9;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            color: #2a5298;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2a5298;
+            outline: none;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .row .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            background-color: #2a5298;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #1e3c72;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+        }
+
+        .success {
+            color: green;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <form id="form1" runat="server">
+
+        <div class="container">
+            <div class="card">
+
+                <div class="title">Student Registration</div>
+
+                <!-- Basic Info -->
+                <div class="section">
+                    <h3>Basic Information</h3>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <asp:TextBox ID="TxtUsername" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                            ControlToValidate="TxtUsername" CssClass="error"
+                            ErrorMessage="Name is required"></asp:RequiredFieldValidator>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Password</label>
+                            <asp:TextBox ID="TxtPassword" runat="server" TextMode="Password"></asp:TextBox>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <asp:TextBox ID="TxtRePassword" runat="server" TextMode="Password"></asp:TextBox>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <asp:TextBox ID="TxtPhoneNo" runat="server" MaxLength="10"></asp:TextBox>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <asp:TextBox ID="TextBox2" runat="server" TextMode="Email"></asp:TextBox>
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="section">
+                    <h3>Personal Details</h3>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <asp:RadioButton ID="RBtnMale" runat="server" GroupName="Gender" Text="Male" Checked="True" />
+                        <asp:RadioButton ID="RbtnFemale" runat="server" GroupName="Gender" Text="Female" />
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>State</label>
+                            <asp:DropDownList ID="DdlState" runat="server" AutoPostBack="True"
+                                OnSelectedIndexChanged="DdlState_SelectedIndexChanged">
+                                <asp:ListItem>Select your State</asp:ListItem>
+                                <asp:ListItem>AP</asp:ListItem>
+                                <asp:ListItem>TG</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+
+                        <div class="form-group">
+                            <label>City</label>
+                            <asp:DropDownList ID="DdlCity" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Address</label>
+                        <asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine"></asp:TextBox>
+                    </div>
+                </div>
+
+                <!-- Additional -->
+                <div class="section">
+                    <h3>Additional Details</h3>
+
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <asp:LinkButton ID="LkbtnDOB" runat="server" OnClick="LkbtnDOB_Click">Choose Date</asp:LinkButton>
+                        <br /><br />
+                        <asp:Calendar ID="CalDOB" runat="server" Visible="False"
+                            OnSelectionChanged="CalDOB_SelectionChanged"></asp:Calendar>
+                        <asp:Label ID="LblDOB" runat="server"></asp:Label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Photo</label>
+                        <asp:FileUpload ID="FileUploadSelection" runat="server" />
+                        <br />
+                        <asp:Button ID="BtnUpload" runat="server" Text="Upload" CssClass="btn"
+                            OnClick="BtnUpload_Click" />
+                        <asp:Label ID="LblUploaded" runat="server" CssClass="success"></asp:Label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <asp:DropDownList ID="DdlCourse" runat="server"></asp:DropDownList>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="form-group">
+                    <asp:Label ID="LabelError" runat="server" CssClass="error"></asp:Label>
+                    <br />
+                    <asp:Button ID="Button1" runat="server"
+                        Text="Register"
+                        CssClass="btn"
+                        OnClick="Button1_Click" />
+                </div>
+
+            </div>
+        </div>
+
     </form>
 </body>
 </html>

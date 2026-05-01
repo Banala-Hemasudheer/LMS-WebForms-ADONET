@@ -5,99 +5,123 @@
 <html>
 <head runat="server">
     <title>LMS</title>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
     <style type="text/css">
-        .auto-style1 {
-            width: 100%;
-            background-color:antiquewhite;
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #f4f6f9;
         }
-        .auto-style2 {
-            width: 100%;
-            background-color:thistle;
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
-        /* Top-level menu container */
+
+        /* Navigation bar */
+        .nav-container {
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
         .navMenu ul {
             display: flex;
-            gap: 10px; /* space between capsules */
-            padding: 10px;
+            justify-content: center;
+            gap: 15px;
+            padding: 0;
             margin: 0;
             list-style: none;
         }
-        
-        /* Top-level menu items */
+
         .navMenu > ul > li > a {
-            border: 2px solid #1abc9c;
-            /*border-radius: 999px;*/   /* capsule shape */
-            padding: 10px 18px;
-            color: black !important;
-            background-color: transparent;
+            text-decoration: none !important;
+            border-radius: 25px;
+            padding: 8px 18px;
+            color: #2a5298 !important;
+            border: 2px solid #2a5298;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
-        
-        /* Hover effect */
+
         .navMenu > ul > li > a:hover {
-            background-color: #1abc9c;
-            color: #fff !important;
+            background-color: #2a5298;
+            color: white !important;
         }
-        
-        /* Dropdown container */
+
+        /* Dropdown */
         .navMenu ul ul {
-            /*border-radius: 12px;*/
-            overflow: hidden;
+            background-color: white;
+            border-radius: 8px;
+            padding: 5px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        
-        /* Dropdown items */
+
         .navMenu ul ul a {
-            /*border-radius: 0;*/
-            border: none;
-            background-color: transparent;
+            padding: 8px 15px;
+            color: #333 !important;
         }
-        
+
         .navMenu ul ul a:hover {
-            background-color: #1abc9c;
+            background-color: #2a5298;
+            color: white !important;
+        }
+
+        /* Content area */
+        .content-wrapper {
+            width: 85%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
     </style>
 </head>
+
 <body>
     <form id="form1" runat="server">
-        <h4 style="text-align: center" > Welcome to LMS</h4>
-        <table class="auto-style1">
-            <tr>
-                <td>
-                    <asp:Menu ID="Menu1" runat="server" orientation="Horizontal" CssClass="navMenu">
-                        <Items>
-                            <asp:MenuItem Text="The Home" Value="The Home"></asp:MenuItem>
-                            <asp:MenuItem Text="Student" Value="Student">
-                                <asp:MenuItem Text="Login" Value="Login" NavigateUrl="~/Student_/StudentLogin.aspx"></asp:MenuItem>
-                                <asp:MenuItem NavigateUrl="~/Student_/Register.aspx" Text="Register" Value="Register"></asp:MenuItem>
-                            </asp:MenuItem>
-                            <asp:MenuItem Text="Faculty" Value="Faculty">
-                                <asp:MenuItem Text="Login" Value="Login" NavigateUrl="~/Faculty/FacultyLogin.aspx"></asp:MenuItem>
-                            </asp:MenuItem>
-                        </Items>
-                    </asp:Menu>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    &nbsp;</td>
-            </tr>
-            </table>
 
-        <%--adding a placeholder for adding content in my Defaultpage--%>
+        <!-- Header -->
+        <div class="header">
+            Learning Management System
+        </div>
 
-            <table class="auto-style2">
-                <tr>
-                    <td>
-                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </td>
-                </tr>
-            </table>
+        <!-- Navigation -->
+        <div class="nav-container">
+            <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" CssClass="navMenu">
+                <Items>
+                    <asp:MenuItem Text="Home" Value="Home"></asp:MenuItem>
+
+                    <asp:MenuItem Text="Student" Value="Student">
+                        <asp:MenuItem Text="Login" NavigateUrl="~/Student_/StudentLogin.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Register" NavigateUrl="~/Student_/Register.aspx"></asp:MenuItem>
+                    </asp:MenuItem>
+
+                    <asp:MenuItem Text="Faculty" Value="Faculty">
+                        <asp:MenuItem Text="Login" NavigateUrl="~/Faculty/FacultyLogin.aspx"></asp:MenuItem>
+                    </asp:MenuItem>
+                </Items>
+            </asp:Menu>
+        </div>
+
+        <!-- Content -->
+        <div class="content-wrapper">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
 
     </form>
-
 </body>
 </html>
