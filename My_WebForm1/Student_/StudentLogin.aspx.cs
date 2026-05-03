@@ -25,7 +25,7 @@ namespace My_WebForm1.Student_
             student.Password = TxtStudPassword.Text;
 
             StudentDao studentDao = new StudentDao();
-            student = studentDao.CheckUserLogin(student);
+            student = studentDao.CheckStudLogin(student);
 
             if (student.Id > 0)
             {
@@ -43,6 +43,7 @@ namespace My_WebForm1.Student_
             else {
                 LblStudLogin.Text = "Error while Log in";
                 LblStudLogin.ForeColor = System.Drawing.Color.Red;
+                LblStudLogin.Visible = true;
             }
 
 

@@ -19,5 +19,7 @@ namespace My_WebForm1.Model
         public string DOB { get; set; }
 
         public int FKCourseId { get; set; }
+
+        public string EnPassword { get; set; }
     }
 }

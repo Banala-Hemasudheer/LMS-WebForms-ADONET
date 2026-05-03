@@ -1,5 +1,6 @@
 ﻿using My_WebForm1.Dao;
 using My_WebForm1.Model;
+using My_WebForm1.Service;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,7 +44,7 @@ namespace My_WebForm1.Student_
 
             Student student = new Student();
 
-                //Inserting student details into Database
+            //Inserting student details into Database
             student.Name = TxtUsername.Text; //Request.QueryString["username"];
             student.Password = TxtPassword.Text;
             student.Mail = TextBox2.Text;
@@ -55,15 +56,31 @@ namespace My_WebForm1.Student_
             student.DOB = CalDOB.SelectedDate.ToString();
             student.FKCourseId = int.Parse(DdlCourse.SelectedValue);
 
+            student.EnPassword = PasswordHelper.HashPassword(student.Password);   //Hashing the password before storing in database
+
+            if (student.EnPassword == null || student.Name==null || student.FKCourseId==null) {
+                LabelError.Text = "Error hashing the password. Please try again.";
+                LabelError.ForeColor = System.Drawing.Color.Red;
+                LabelError.Visible = true;
+                return; // Exit the method if hashing fails
+            }
+
+
             StudentDao studentDao = new StudentDao();
             int result = studentDao.Insert(student);
 
             if (result == 0) {
                 Console.WriteLine("Unable to insert record");
+                LabelError.Text = "Unable to Register !!! ";
+                LabelError.ForeColor = System.Drawing.Color.Red;
+                LabelError.Visible = true;
             }
-            //else {
-            //    Response.Redirect("Home.aspx?user=admin");      //Redirect to home page if inserted 
-            //}
+            else {
+                //    Response.Redirect("Home.aspx?user=admin");      //Redirect to home page if inserted 
+                LabelError.Text = "Registered successfully !!! ";
+                LabelError.ForeColor = System.Drawing.Color.Green;
+                LabelError.Visible = true;
+            }
 
 
             //if ((TxtUsername.Text == "Ram") && (TxtPassword.Text == "123"))

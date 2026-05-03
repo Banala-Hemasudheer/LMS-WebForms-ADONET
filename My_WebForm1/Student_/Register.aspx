@@ -282,6 +282,12 @@
             font-size: 13px;
         }
 
+        .radio-group {
+            display: inline-flex;
+            gap: 10px;          /* space between options */
+            align-items: center;
+        }
+
     </style>
 
 </head>
@@ -334,9 +340,11 @@
                     <h3>Personal Details</h3>
 
                     <div class="form-group">
-                        <label>Gender</label>
-                        <asp:RadioButton ID="RBtnMale" runat="server" GroupName="Gender" Text="Male" Checked="True" />
-                        <asp:RadioButton ID="RbtnFemale" runat="server" GroupName="Gender" Text="Female" />
+                        <div class="radio-group">
+                             <label>Gender</label>
+                            <asp:RadioButton ID="RBtnMale" runat="server" GroupName="Gender" Text="Male" Checked="True" />
+                            <asp:RadioButton ID="RbtnFemale" runat="server" GroupName="Gender" Text="Female" />
+                        </div>
                     </div>
 
                     <div class="row">

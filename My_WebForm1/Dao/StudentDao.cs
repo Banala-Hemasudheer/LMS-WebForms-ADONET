@@ -1,4 +1,5 @@
 ﻿using My_WebForm1.Model;
+using My_WebForm1.Service;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,7 @@ namespace My_WebForm1.Dao
         {
             Student student = (Student)model;
 
-            string qry = @"insert into studentMaster values (@Name, @Password, @Phone, @Mail, @Gender, @State, @City, @Address, @DOB, @FKCourseId)";
+            string qry = @"insert into studentMaster values (@Name, @Password, @Phone, @Mail, @Gender, @State, @City, @Address, @DOB, @FKCourseId, @EnPassword)";
             List<SqlParameter> lt_params = new List<SqlParameter>()
             {
                 new SqlParameter("@Name", student.Name),
@@ -26,7 +27,8 @@ namespace My_WebForm1.Dao
                 new SqlParameter("@City", student.City),
                 new SqlParameter("@Address", student.Address),
                 new SqlParameter("@DOB", student.DOB),
-                new SqlParameter("@FKCourseId", student.FKCourseId)
+                new SqlParameter("@FKCourseId", student.FKCourseId),
+                new SqlParameter("@EnPassword", student.EnPassword)
             };
             
 
@@ -66,7 +68,7 @@ namespace My_WebForm1.Dao
             return dt;
         }
 
-        public Student CheckUserLogin(Student student)
+        public Student CheckStudLogin(Student student)
         {
             string query = "select * from studentMaster where Name='" + student.Name + "' and Password='" + student.Password + "'";
             DataTable dt = GetData(query);
@@ -75,6 +77,18 @@ namespace My_WebForm1.Dao
             {
                 student.Id = (int)dt.Rows[0]["ID"];
                 student.FKCourseId = (int)dt.Rows[0]["FKCourseID"];
+                student.EnPassword    = dt.Rows[0]["EnPassword"].ToString();
+            }
+            else
+            {
+                student.Id = 0; // If EnPassword is null, reset Id to 0 to indicate failure
+                return student;
+            }
+
+            bool Authenticated = PasswordHelper.VerifyPassword(student.Password, student.EnPassword);  // Verify the entered password against the stored hash
+            if (!Authenticated) 
+            {
+                student.Id = 0; // If authentication fails, reset Id to 0 to indicate failure
             }
 
             return student;

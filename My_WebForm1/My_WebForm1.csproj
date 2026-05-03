@@ -195,6 +195,7 @@
     <Compile Include="Dao\TestDao.cs" />
     <Compile Include="Dao\TestQuestionsDao.cs" />
     <Compile Include="Dao\TestSummaryDao.cs" />
+    <Compile Include="Dao\UsersDao.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -256,6 +257,8 @@
     <Compile Include="Model\Test.cs" />
     <Compile Include="Model\TestQuestions.cs" />
     <Compile Include="Model\TestSummary.cs" />
+    <Compile Include="Model\Users.cs" />
+    <Compile Include="Service\PasswordHelper.cs" />
     <Compile Include="Student_\AttemptTest.aspx.cs">
       <DependentUpon>AttemptTest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
