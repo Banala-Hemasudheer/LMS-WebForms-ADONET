@@ -11,6 +11,17 @@ namespace My_WebForm1.Student_
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Prevent browser caching - To avoid going back to this page after logout using browser back button
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.MinValue);
+
+            // Always check session FIRST
+            if (Session["studid"] == null)
+            {
+                Response.Redirect("StudentLogin.aspx");
+                return;
+            }
 
             if (!IsPostBack)
             {
@@ -21,5 +32,13 @@ namespace My_WebForm1.Student_
                 // Keep studid if they need to stay logged in!
             }
         }
+
+        protected void LogOutBtn2_Clk(object sender, EventArgs e)
+        {
+            Session.Clear();      // Clear all session variables
+            Session.Abandon();      // Destroy the session completely
+            Response.Redirect("StudentLogin.aspx");   // Redirect to login page
+        }
+
     }
 }

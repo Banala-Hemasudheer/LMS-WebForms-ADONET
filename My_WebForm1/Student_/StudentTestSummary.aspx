@@ -1,5 +1,15 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentTestSummary.aspx.cs" Inherits="My_WebForm1.Student_.StudentTestSummary" %>
 
+<%--Add .js file to prevent browser back button after logout--%>
+<%--Force refresh on page load to prevent caching--%>
+<script type="text/javascript">
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+</script>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,14 +22,39 @@
         .auto-style2 {
             width: 180px;
         }
+
+
+      /*logout button*/
+
+      .center-label {
+          text-align: center;
+      }
+
+      .logout-btn {
+          position: absolute;
+          right: 10px; /* moves button to right corner */
+
+              background-color: white;      /* white fill */
+              color: #5bc0de;               /* light blue text */
+              border: 2px solid #5bc0de;    /* light blue border */
+              padding: 6px 14px;
+              border-radius: 5px;
+              cursor: pointer;
+      }
+
+
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+          
         <div>
             <table class="auto-style1">
                 <tr>
-                    <td colspan="2" style="text-align: center">Welcome to Test Summary - <%=Session["studName"] %></td>
+                    <td class="center-label" colspan="2" style="text-align: center">Welcome to Test Summary - <%=Session["studName"] %>
+                        <asp:Button ID="LogOutBtn2" runat="server" Text="Log Out" class="logout-btn" OnClick="LogOutBtn2_Clk" />
+                    </td>
+                    
                 </tr>
                 <tr>
                     <td class="auto-style2">Test Summary:</td>

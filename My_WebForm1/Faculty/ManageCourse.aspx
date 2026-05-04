@@ -1,5 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageCourse.aspx.cs" Inherits="My_WebForm1.Faculty.ManageCourse" %>
 
+<%--Add .js file to prevent browser back button after logout--%><%--Force refresh on page load to prevent caching--%>
+<script type="text/javascript">
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+</script>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,6 +34,24 @@
         .auto-style5 {
             height: 29px;
         }
+
+        /*logout button*/
+        .center-label {
+            text-align: center;
+        }
+
+        .logout-btn {
+            position: absolute;
+            right: 10px; /* moves button to right corner */
+
+                background-color: white;      /* white fill */
+                color: #5bc0de;               /* light blue text */
+                border: 2px solid #5bc0de;    /* light blue border */
+                padding: 6px 14px;
+                border-radius: 5px;
+                cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -32,8 +59,12 @@
         <div>
             <table border="1" border-color="blue" cell-spacing="0" width="100%">
                 <tr>
-                   <%--<%=Session["facultyname"] %>--%>  
-                    <td colspan="2"><h2>Welcome <% =Session["FacultyName"] %> </h2></td>
+                    <%--<%=Session["facultyname"] %>--%>  
+                    <td class="center-label" colspan="2"><h2>Welcome <% =Session["FacultyName"] %>
+                        <asp:Button class="logout-btn" ID="FacLogOutBtn1" runat="server" OnClick="FacLogOut_Clk" Text="Log Out" />
+                        </h2>
+
+                    </td>
                 </tr>
 
                 <tr>

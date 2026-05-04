@@ -55,7 +55,7 @@
                     </td>
                     <%--<td>&nbsp;</td>--%>
                 </tr>
-                <%--<tr>
+<%--<tr>
                     <td  class="auto-style2">Your Course Material links:</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -94,6 +94,9 @@
 
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="StudentHome.aspx.cs" Inherits="My_WebForm1.Student_.StudentHome" %>
 
+<%--Adding the reference to the JavaScript file for StudentHome page:--%>
+<script src="StudentHome.js"></script> 
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -114,6 +117,12 @@
         }
 
         .welcome {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* centers label */
+            position: relative;
+            height: 60px; /* adjust as needed */
+
             text-align: center;
             font-size: 22px;
             font-weight: 600;
@@ -183,6 +192,24 @@
             background-color: #1e3c72;
         }
 
+        /*logout button*/
+
+        .center-label {
+            text-align: center;
+        }
+
+        .logout-btn {
+            position: absolute;
+            right: 10px; /* moves button to right corner */
+
+                background-color: white;      /* white fill */
+                color: #5bc0de;               /* light blue text */
+                border: 2px solid #5bc0de;    /* light blue border */
+                padding: 6px 14px;
+                border-radius: 5px;
+                cursor: pointer;
+        }
+
     </style>
 
 </head>
@@ -194,7 +221,8 @@
 
             <!-- Welcome -->
             <div class="welcome">
-                <asp:Label ID="LblStudHome" runat="server"></asp:Label>
+                <asp:Label ID="LblStudHome" runat="server" CssClass="center-label"></asp:Label>
+                <asp:Button ID="LogOutBtn" runat="server" Text="Log Out" ValidateRequestMode="Disabled" CssClass="logout-btn" OnClick="LogOutBtn_Click" />
             </div>
 
             <!-- Course Details -->

@@ -182,6 +182,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Student_\StudentHome.aspx" />
+    <Content Include="Student_\StudentHome.js" />
     <Content Include="Student_\StudentLogin.aspx" />
     <Content Include="Student_\StudentTestSummary.aspx" />
     <Content Include="ViewSwitcher.ascx" />

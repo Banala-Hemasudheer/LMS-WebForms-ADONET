@@ -24,6 +24,15 @@ namespace My_WebForm1.Student_
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// LogOutBtn2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LogOutBtn2;
+
+        /// <summary>
         /// DataList1 control.
         /// </summary>
         /// <remarks>

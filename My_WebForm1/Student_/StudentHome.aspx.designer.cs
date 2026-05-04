@@ -33,6 +33,15 @@ namespace My_WebForm1.Student_
         protected global::System.Web.UI.WebControls.Label LblStudHome;
 
         /// <summary>
+        /// LogOutBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LogOutBtn;
+
+        /// <summary>
         /// DLCourseDetails control.
         /// </summary>
         /// <remarks>

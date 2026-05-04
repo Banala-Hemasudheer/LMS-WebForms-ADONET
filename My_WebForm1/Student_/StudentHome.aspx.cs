@@ -13,7 +13,20 @@ namespace My_WebForm1.Student_
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            // Prevent browser caching - To avoid going back to this page after logout using browser back button
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.MinValue);
+
+
+            // Always check session FIRST
+            if (Session["studid"] == null)
+            {
+                Response.Redirect("StudentLogin.aspx");
+                return;
+            }
+
+            if (!IsPostBack)
             {
                 //if (Request.QueryString["studname"] != null)
                 //{
@@ -21,8 +34,8 @@ namespace My_WebForm1.Student_
                     //string name = Request.QueryString["studname"];
                     //string Id = Request.QueryString["studid"];
 
-                if ((int)Session["studid"] > 0)
-                 {
+                //if ((string)Session["studname"] != null)
+                // {
                     // 2nd way - using session
                     string name = (string)Session["studname"];
                     int Id = (int)Session["studid"];
@@ -30,11 +43,11 @@ namespace My_WebForm1.Student_
 
                     // Calling Stored Procedure to update Grid
                     TestsWithAttempts(Id);
-                }
-                else
-                {
-                    LblStudHome.Text = "Welcome ";
-                }
+                //}
+                //else
+                //{
+                //    //LblStudHome.Text = "Welcome "; 
+                //}
             }
           
 
@@ -60,7 +73,12 @@ namespace My_WebForm1.Student_
             GridViewTWA.DataBind();
         }
 
-
+        protected void LogOutBtn_Click(object sender, EventArgs e)
+        {
+            Session.Clear();      // Clear all session variables
+            Session.Abandon();      // Destroy the session completely
+            Response.Redirect("StudentLogin.aspx");   // Redirect to login page
+        }
     }
 }
 

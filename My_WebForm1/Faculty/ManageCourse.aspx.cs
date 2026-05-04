@@ -13,6 +13,18 @@ namespace My_WebForm1.Faculty
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Prevent browser caching - To avoid going back to this page after logout using browser back button
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetExpires(DateTime.MinValue);
+
+            // Always check session FIRST
+            if (Session["FacultyName"] == null)
+            {
+                Response.Redirect("FacultyLogin.aspx");
+                return;
+            }
+
             if (!IsPostBack)
             {
 
@@ -56,6 +68,13 @@ namespace My_WebForm1.Faculty
                 LblCourseError.Visible = true;
             }
         
+        }
+
+        protected void FacLogOut_Clk(object sender, EventArgs e)
+        {
+            Session.Clear();      // Clear all session variables
+            Session.Abandon();      // Destroy the session completely
+            Response.Redirect("FacultyLogin.aspx");   // Redirect to login page
         }
     }
 }
